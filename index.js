@@ -77,14 +77,14 @@ function copyRows(toSheet, fromSheet, toRow, fromRow) {
 
         if (readLetters[i] == undefined) {
             const readColumn = fromSheet.getColumn(
-                indexOfHeader(fromSheet, header),
+                indexOfHeader(fromSheet, header, READ_OFFSET),
             );
             readLetters[i] = readColumn.letter;
         }
 
         if (writeLetters[i] == undefined) {
             const writeColumn = toSheet.getColumn(
-                indexOfHeader(toSheet, header),
+                indexOfHeader(toSheet, header, WRITE_OFFSET),
             );
             writeLetters[i] = writeColumn.letter;
         }
@@ -96,9 +96,9 @@ function copyRows(toSheet, fromSheet, toRow, fromRow) {
 }
 
 const headerValues = [];
-function indexOfHeader(sheet, header) {
-    headerValues[sheet.id] = headerValues[sheet.id] || sheet.getRow(1).values;
+function indexOfHeader(sheet, header, offset) {
+    headerValues[sheet.id] = headerValues[sheet.id] || sheet.getRow(offset).values;
     return headerValues[sheet.id].indexOf(header);
 }
 
-main();
+main()
